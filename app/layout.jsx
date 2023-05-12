@@ -1,5 +1,5 @@
 import theme from '@/src/theme';
-import { ThemeProvider } from '../components/Mui';
+import { ThemeProvider } from '../components/Mui/material';
 import PropTypes from 'prop-types';
 
 export default function RootLayout({ children }) {

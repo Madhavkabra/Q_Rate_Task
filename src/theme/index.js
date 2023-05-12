@@ -1,6 +1,6 @@
 'use client';
 
-import { createTheme as createMuiTheme } from '../../components/Mui';
+import { createTheme as createMuiTheme } from '../../components/Mui/material';
 import { baseThemeOptions } from './base-theme-options';
 import { darkThemeOptions } from './dark-theme-options';
 import { lightThemeOptions } from './light-theme-options';
