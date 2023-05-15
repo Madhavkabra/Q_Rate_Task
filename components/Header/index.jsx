@@ -1,56 +1,53 @@
-import PropTypes from 'prop-types';
+import React from 'react';
+import { makeStyles } from '@mui/styles';
+import Drawer from '@mui/material/Drawer';
+import { Box } from '@mui/material';
+import AppMenu from './AppMenu';
 
-// material-ui
-import { useTheme } from '@mui/material/styles';
-import { Box, IconButton } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-
-// project import
-import LogoSection from '../LogoSection/index.jsx';
-
-const Header = ({ handleLeftDrawerToggle }) => {
-  const theme = useTheme();
+const Header = () => {
+  const classes = useStyles();
 
   return (
-    <Box
-      sx={{
-        width: 330,
-        display: 'flex',
-        [theme.breakpoints.down('sm')]: {
-          width: 'auto',
-        },
+    <Drawer
+      variant='permanent'
+      classes={{
+        paper: classes.drawerPaper,
       }}
     >
       <Box
-        component='span'
-        sx={{ flexGrow: 1 }}
-      >
-        <LogoSection />
-      </Box>
-      <IconButton
-        disableRipple
-        onClick={handleLeftDrawerToggle}
-        edge='start'
-        sx={{
-          transition: 'all .2s ease-in-out',
-          background: theme.palette.primary.main,
-          color: theme.palette.primary.contrast,
-          '&:hover': {
-            background: theme.palette.secondary.main,
-            color: theme.palette.secondary.contrast,
-          },
-          mr: 3,
-        }}
-        aria-label='open drawer'
-      >
-        <MenuIcon />
-      </IconButton>
-    </Box>
+        mt='-22px'
+        height='119px'
+        width='219px'
+        component='img'
+        src='/download.png'
+      ></Box>
+      <AppMenu />
+    </Drawer>
   );
 };
 
-Header.propTypes = {
-  handleLeftDrawerToggle: PropTypes.func.isRequired,
-};
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+  },
+  drawerPaper: {
+    position: 'relative',
+    whiteSpace: 'nowrap',
+    width: '220px !important',
+    paddingBottom: theme.spacing(4),
+    color: '#fff',
+    height: '100vh',
+    fontSize: '2rem',
+  },
+  content: {
+    flexGrow: 1,
+    height: '100vh',
+    overflow: 'auto',
+  },
+  container: {
+    paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(4),
+  },
+}));
 
 export default Header;
