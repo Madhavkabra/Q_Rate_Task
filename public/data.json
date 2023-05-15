@@ -1,0 +1,100 @@
+[
+  {
+    "course_id": "645f750cd39941a9ad381b80",
+    "course_name": "Javascript",
+    "lessons": [
+      {
+        "lesson_id": "645f75b7ac21ec8862b96e89",
+        "lesson_name": "Javascript Lesson 1",
+        "video_url": "https://www.youtube.com/embed/MvsAesQ-4zA",
+        "questions": [
+          {
+            "id": 1,
+            "question": "Why is typescript inferior to javascript?",
+            "answers": [
+              "Because it is new, and new things are dumb",
+              "It is not",
+              "Because JavaScript rocks TypeScipt shocks",
+              "Because I don not like it"
+            ],
+            "correctAnswer": "It is not"
+          },
+          {
+            "id": 2,
+            "question": "What is the largest continent in the world? lesson 1",
+            "answers": ["North America", "South America", "Europe", "Asia"],
+            "correctAnswer": "Asia"
+          }
+        ]
+      },
+      {
+        "lesson_id": "645f75bd61eec9983689dced",
+        "lesson_name": "Javascript Lesson 2",
+        "video_url": "https://www.youtube.com/watch?v=FAyKDaXEAgc",
+        "questions": [
+          {
+            "id": 1,
+            "question": "What is javascript?",
+            "answers": [
+              "A programming language",
+              "A fruit",
+              "A famous person",
+              "Your neighbour"
+            ],
+            "correctAnswer": "A programming language"
+          },
+          {
+            "id": 2,
+            "question": "What is the largest continent in the world?",
+            "answers": ["North America", "South America", "Europe", "Asia"],
+            "correctAnswer": "Asia"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "course_id": "645f75989425a9417fd1e871",
+    "course_name": "Node",
+    "lessons": [
+      {
+        "lesson_id": "645f75c9caa0ac7db1d33233",
+        "lesson_name": "Node Lesson 1",
+        "video_url": "https://www.youtube.com/watch?v=snYu2JUqSWs",
+        "questions": [
+          {
+            "id": 1,
+            "question": "What is the capital of France?lesson 1 course 2",
+            "answers": ["London", "Paris", "New York", "Madrid"],
+            "correctAnswer": "Paris"
+          },
+          {
+            "id": 2,
+            "question": "What is the largest continent in the world?  lesson 1 course 2",
+            "answers": ["North America", "South America", "Europe", "Asia"],
+            "correctAnswer": "Asia"
+          }
+        ]
+      },
+      {
+        "lesson_id": "645f75d4a68f1a772314680e",
+        "lesson_name": "Node Lesson 2",
+        "video_url": "https://www.youtube.com/watch?v=lTTajzrSkCw",
+        "questions": [
+          {
+            "id": 1,
+            "question": "What is the capital of France?  lesson 2 course 2",
+            "answers": ["London", "Paris", "New York", "Madrid"],
+            "correctAnswer": "Paris"
+          },
+          {
+            "id": 2,
+            "question": "What is the largest continent in the world? lesson 2 course 2",
+            "answers": ["North America", "South America", "Europe", "Asia"],
+            "correctAnswer": "Asia"
+          }
+        ]
+      }
+    ]
+  }
+]
