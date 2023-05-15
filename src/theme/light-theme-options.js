@@ -10,7 +10,7 @@ const primary = {
 };
 
 const secondary = {
-  100: '#F5FFFE',
+  100: '#FFF4F0',
   200: '#BCE2E2',
   300: '#86C8C8',
   400: '#0F9292',
@@ -122,7 +122,6 @@ export const lightThemeOptions = {
         },
       },
     },
-
 
     MuiButton: {
       styleOverrides: {
@@ -369,12 +368,13 @@ export const lightThemeOptions = {
     MuiLink: {
       styleOverrides: {
         root: {
-          '& .MuiLink-root': {
+          '&.MuiList-root': {
             fontWeight: 400,
             fontSize: '1.75rem',
             lineHeight: '3rem',
             color: secondary[600],
             cursor: 'pointer',
+            backgroundColor: 'red',
           },
         },
       },
@@ -492,7 +492,7 @@ export const lightThemeOptions = {
               color: primary[300],
             },
             '& .MuiSvgIcon-root': {
-              color: primary[300],
+              color: '#ED7342',
             },
           },
           '&.MuiChip-filledSecondary': {
@@ -504,7 +504,7 @@ export const lightThemeOptions = {
               color: secondary[600],
             },
             '& .MuiSvgIcon-root': {
-              color: secondary[600],
+              color: '#ED7342',
             },
           },
           '&.MuiChip-filledError': {
@@ -527,7 +527,7 @@ export const lightThemeOptions = {
             backgroundColor: warning[200],
             color: neutral[800],
             '& .MuiSvgIcon-root': {
-              color: neutral[800],
+              color: '#ED7342',
             },
           },
           '&.MuiChip-outlinedWarning': {
@@ -536,14 +536,14 @@ export const lightThemeOptions = {
               color: warning[300],
             },
             '& .MuiSvgIcon-root': {
-              color: warning[300],
+              color: '#ED7342',
             },
           },
           '&.MuiChip-filledSuccess': {
             backgroundColor: secondary[200],
             color: neutral[800],
             '& .MuiSvgIcon-root': {
-              color: neutral[800],
+              color: '#ED7342',
             },
           },
           '&.MuiChip-outlinedSuccess': {
@@ -552,7 +552,7 @@ export const lightThemeOptions = {
               color: secondary[300],
             },
             '& .MuiSvgIcon-root': {
-              color: secondary[300],
+              color: '#ED7342',
             },
           },
           '&.Mui-disabled': {
@@ -561,7 +561,7 @@ export const lightThemeOptions = {
               color: neutral[800],
             },
             '& .MuiSvgIcon-root': {
-              color: neutral[800],
+              color: '#ED7342',
             },
           },
         },
@@ -570,9 +570,22 @@ export const lightThemeOptions = {
 
     MuiListItem: {
       styleOverrides: {
+        root: {
+          '&.Mui-selected': {
+            backgroundColor: '#FFF4F0',
+            color: 'red',
+            '&& .MuiTypography-root': { color: '#ED7342' },
+          },
+        },
+        typography: {
+          color: 'red',
+        },
         button: {
           '&:before': {
             backgroundColor: primary[200],
+          },
+          '& .MuiSvgIcon-root': {
+            color: '#ED7342',
           },
         },
       },
@@ -895,7 +908,7 @@ export const lightThemeOptions = {
             borderRadius: '0.5rem',
 
             '&.MuiLinearProgress-colorPrimary': {
-              backgroundColor: 'rgba(33, 82, 99, 0.6)',
+              backgroundColor: '#FFF4F0',
             },
 
             '& .MuiLinearProgress-barColorPrimary': {
@@ -980,6 +993,10 @@ export const lightThemeOptions = {
       },
     },
 
-    shadows: ['none', '0px 36px 46px rgba(9, 30, 66, 0.12)', '0px 1px 2px rgba(9, 30, 66, 0.12)'],
+    shadows: [
+      'none',
+      '0px 36px 46px rgba(9, 30, 66, 0.12)',
+      '0px 1px 2px rgba(9, 30, 66, 0.12)',
+    ],
   },
 };

@@ -7,7 +7,6 @@ import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import Collapse from '@mui/material/Collapse';
 import AppMenuItemComponent from './AppMenuItemComponent';
-import { useSelector } from 'react-redux';
 
 export const AppMenuItemPropTypes = {
   name: PropTypes.string.isRequired,
@@ -21,7 +20,6 @@ const AppMenuItem = (props) => {
   const classes = useStyles();
   const isExpandable = items && items.length > 0;
   const [open, setOpen] = React.useState(false);
-  const activeLesson = useSelector((state) => state.progress.activeLesson)
 
   function handleClick() {
     setOpen(!open);
@@ -34,10 +32,9 @@ const AppMenuItem = (props) => {
       id={id}
       link={link}
       onClick={handleClick}
-      isDisabled={false}
     >
       {!!Icon && (
-        <ListItemIcon className={classes.menuItemIcon}>
+        <ListItemIcon>
           <Icon />
         </ListItemIcon>
       )}
@@ -47,7 +44,7 @@ const AppMenuItem = (props) => {
 
   const MenuItemChildren = isExpandable ? (
     <Collapse in={open} timeout='auto' unmountOnExit>
-      <List component='div' sx={{ pl: 2 }}>
+      <List component='div' sx={{ paddingX: 2 }}>
         {items.map((item, index) => (
           <AppMenuItem {...item} key={index} />
         ))}

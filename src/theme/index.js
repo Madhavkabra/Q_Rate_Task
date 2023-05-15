@@ -1,20 +1,13 @@
-'use client';
+"use client";
 
-import { createTheme as createMuiTheme } from '../../components/Mui/material';
-import { baseThemeOptions } from './base-theme-options';
-import { darkThemeOptions } from './dark-theme-options';
-import { lightThemeOptions } from './light-theme-options';
+import { createTheme as createMuiTheme } from "../../components/Mui/material";
+import { baseThemeOptions } from "./base-theme-options";
+import { lightThemeOptions } from "./light-theme-options";
 
 const createTheme = (config) => {
-  return createMuiTheme(
-    baseThemeOptions,
-    config.mode === 'dark' ? darkThemeOptions : lightThemeOptions,
-    {
-      direction: config.direction,
-    }
-  );
+  return createMuiTheme(baseThemeOptions, lightThemeOptions, {});
 };
 
-const theme = createTheme({ mode: 'light', direction: 'ltr' });
+const theme = createTheme();
 
 export default theme;

@@ -2,13 +2,15 @@ import React, { forwardRef } from "react";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 import { Box, Checkbox, Typography, ListItem } from "@mui/material";
+import data from "../../public/data.json";
+import { useParams } from "next/navigation";
 
 const AppMenuItemComponent = (props) => {
-  const { className, onClick, link, children, name, id, isDisabled } = props;
+  const param = useParams();
+  const { className, onClick, link, children, name, id } = props;
 
   const completed = useSelector((state) => state.progress.completedLessons);
   const isComplete = completed.join(",").includes(id);
-  console.log(id, completed, isComplete);
 
   if (!link || typeof link !== "string") {
     return (
@@ -17,19 +19,21 @@ const AppMenuItemComponent = (props) => {
       </ListItem>
     );
   }
+
   return (
     <ListItem
-      disabled={isDisabled}
+      selected={param.lesson === id}
+      disabled={!completed.includes(id) && param.lesson !== id}
       button
       className={className}
       // eslint-disable-next-line react/display-name
       component={forwardRef((props, ref) => (
-        <Box display="flex">
-          <Checkbox disabled size="small" checked={isComplete} />
-          <Link href={link} {...props} innerref={ref}>
+        <Link href={link} {...props} innerref={ref}>
+          <Box display="flex" gap="2rem">
+            <Checkbox disabled size="small" checked={isComplete} />
             <Typography variant="body2">{name}</Typography>
-          </Link>
-        </Box>
+          </Box>
+        </Link>
       ))}
     >
       {children}
