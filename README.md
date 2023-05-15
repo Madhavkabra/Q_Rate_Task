@@ -1,6 +1,6 @@
 # Q-Rate Learning Web
 
-This application has a feature to list down all the available courses and relative lessions.
+This application has a feature to list down all the available courses and relative lessions. You can see a live demo [here]()
 
 ## Features
 

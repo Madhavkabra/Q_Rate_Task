@@ -28,6 +28,7 @@ export default function RootPage({ params }) {
   const videoRef = useRef();
   const time = useSelector((state) => state.progress.videoTime);
   let played = 0;
+  let seek = Math.floor(time[params.lesson] || 0);
 
   const fetchJson = useCallback(() => {
     const { course, lesson } = params;
@@ -45,7 +46,7 @@ export default function RootPage({ params }) {
 
   useEffect(() => {
     fetchJson();
-    // videoRef.current.seekTo(time[params.lesson] || 0)
+    videoRef.current.seekTo(0.5)
     return () => {
       clearInterval(playInterval);
       if (!isLessonCompleted) {
@@ -116,6 +117,15 @@ export default function RootPage({ params }) {
         >
           <ReactPlayer
             ref={videoRef}
+            config={{ 
+              youtube: {
+                playerVars: {
+                  start: seek
+                }
+              }
+            }}
+            controls={true}
+            playing={true}
             url={currentLesson?.video_url}
             onEnded={handleVideoEnd}
             style={{ width: '80%', height: '50vh' }}
