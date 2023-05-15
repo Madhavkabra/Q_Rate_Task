@@ -8,6 +8,7 @@ import {
   setLessonsCompleted,
   setActiveCourse,
   setVideoTime,
+  setActiveLessonIndex,
 } from "@/store/progress";
 import { Box, Button, Typography } from "../../../components/Mui/material";
 
@@ -50,6 +51,7 @@ export default function RootPage({ params }) {
       .catch((e) => {
         console.log(e.message);
       });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);
 
   useEffect(() => {
@@ -61,6 +63,7 @@ export default function RootPage({ params }) {
         dispatch(setVideoTime([params.lesson, played]));
       }
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   console.log(videoRef.current)

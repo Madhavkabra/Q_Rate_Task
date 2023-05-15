@@ -2,7 +2,6 @@ import React, { forwardRef } from "react";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 import { Box, Checkbox, Typography, ListItem } from "@mui/material";
-import data from "../../public/data.json";
 import { useParams } from "next/navigation";
 
 const AppMenuItemComponent = (props) => {
@@ -23,7 +22,6 @@ const AppMenuItemComponent = (props) => {
   return (
     <ListItem
       selected={param.lesson === id}
-      disabled={!completed.includes(id) && param.lesson !== id}
       button
       className={className}
       // eslint-disable-next-line react/display-name

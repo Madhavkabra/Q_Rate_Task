@@ -11,7 +11,6 @@ export const progressSlice = createSlice({
   reducers: {
     setLessonsCompleted: (state, action) => {
       const [courseId, lessonId, lessonCount, totalLessons] = action.payload;
-      console.log(courseId, lessonId, lessonCount);
       state.lessonsCompleted[courseId] = [lessonCount, totalLessons];
       state.completedLessons.push(lessonId);
     },
@@ -25,6 +24,6 @@ export const progressSlice = createSlice({
   },
 });
 
-export const { setOverall, setLessonsCompleted, setActiveCourse, setVideoTime } = progressSlice.actions;
+export const { setLessonsCompleted, setActiveCourse, setVideoTime, setActiveLessonIndex } = progressSlice.actions;
 
 export default progressSlice.reducer;
