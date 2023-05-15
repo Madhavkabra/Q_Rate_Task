@@ -1,8 +1,8 @@
-"use client";
-import React, { useState, useEffect } from "react";
-import { Box, AppBar, Toolbar, Typography } from "../Mui/material";
-import { useSelector } from "react-redux";
-import { LinearProgressWithLabel } from "../PorgressBar";
+'use client';
+import React, { useState, useEffect } from 'react';
+import { Box, AppBar, Toolbar, Typography } from '../Mui/material';
+import { useSelector } from 'react-redux';
+import { LinearProgressWithLabel } from '../ProgressBar';
 
 const Progress = () => {
   const drawerWidth = 220;
@@ -15,7 +15,6 @@ const Progress = () => {
   const inTotalLessons = 4;
 
   useEffect(() => {
-    console.log(lessonsCompleted, activeCourse);
     const [lessonCount, totalLessons] = lessonsCompleted[activeCourse] || [
       0, 1,
     ];
@@ -29,31 +28,28 @@ const Progress = () => {
     } else {
       setCourseProgress((100 * totalLessonsDone) / inTotalLessons);
     }
-    console.log(lessonProgress, courseProgress);
   }, [activeCourse, courseProgress, lessonProgress, lessonsCompleted]);
 
   return (
-    <>
-      <AppBar
-        position="fixed"
-        sx={{
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-          ml: { sm: `${drawerWidth}px` },
-          backgroundColor: "white",
-        }}
-      >
-        <Toolbar sx={{ justifyContent: "end", gap: "4rem" }}>
-          <Box display="flex" gap="2rem" alignItems="center">
-            <Typography fontWeight="600">Current Course Progress:</Typography>
-            <LinearProgressWithLabel value={lessonProgress} />
-          </Box>
-          <Box display="flex" gap="2rem" alignItems="center">
-            <Typography fontWeight="600">Learning Progress:</Typography>
-            <LinearProgressWithLabel value={courseProgress} />
-          </Box>
-        </Toolbar>
-      </AppBar>
-    </>
+    <AppBar
+      position='fixed'
+      sx={{
+        width: { sm: `calc(100% - ${drawerWidth}px)` },
+        ml: { sm: `${drawerWidth}px` },
+        backgroundColor: 'white',
+      }}
+    >
+      <Toolbar sx={{ justifyContent: 'end', gap: '4rem' }}>
+        <Box display='flex' gap='2rem' alignItems='center'>
+          <Typography fontWeight='600'>Current Course Progress:</Typography>
+          <LinearProgressWithLabel value={lessonProgress} />
+        </Box>
+        <Box display='flex' gap='2rem' alignItems='center'>
+          <Typography fontWeight='600'>Learning Progress:</Typography>
+          <LinearProgressWithLabel value={courseProgress} />
+        </Box>
+      </Toolbar>
+    </AppBar>
   );
 };
 

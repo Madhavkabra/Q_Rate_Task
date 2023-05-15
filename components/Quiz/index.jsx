@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import {
   Box,
   Button,
@@ -8,7 +8,6 @@ import {
   CircularProgress,
   FormControl,
   FormControlLabel,
-  FormLabel,
   Grid,
   Radio,
   RadioGroup,
@@ -16,33 +15,28 @@ import {
 } from '@mui/material';
 
 const Quiz = ({ handleQuizFinish, questions }) => {
-  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState('');
-  const [loading, setLoading] = useState(false);
   const [score, setScore] = useState(0);
 
-  const handleAnswerSelection = (e) => {
+  const onAnswerSelect = (e) => {
     setSelectedAnswer(e.target.value);
   };
 
-  const handleNextQuestion = () => {
-    if (selectedAnswer === questions[currentQuestion].correctAnswer) {
+  const handleClickNextQuestion = () => {
+    if (selectedAnswer === questions[currentQuestionIndex].correctAnswer) {
       setScore(score + 1);
     }
     setSelectedAnswer('');
-    setCurrentQuestion(currentQuestion + 1);
+    setCurrentQuestionIndex(currentQuestionIndex + 1);
   };
 
-  const handleFinishQuiz = async () => {
-    if (selectedAnswer === questions[currentQuestion].correctAnswer) {
+  const handleClickFinish = () => {
+    if (selectedAnswer === questions[currentQuestionIndex].correctAnswer) {
       handleQuizFinish(score + 1);
 
-      await setScore(score + 1);
+      setScore(score + 1);
     }
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
   };
 
   return (
@@ -51,11 +45,11 @@ const Quiz = ({ handleQuizFinish, questions }) => {
         <CardContent>
           <Box mb={2}>
             <Typography variant='h6'>
-              Question {currentQuestion + 1} of {questions.length}
+              Question {currentQuestionIndex + 1} of {questions.length}
             </Typography>
           </Box>
           <Typography variant='h5'>
-            {questions[currentQuestion].question}
+            {questions[currentQuestionIndex].question}
           </Typography>
           <Box mt='10px'>
             <FormControl component='fieldset' fullWidth={true}>
@@ -63,9 +57,9 @@ const Quiz = ({ handleQuizFinish, questions }) => {
                 aria-label='answer'
                 name='answer'
                 value={selectedAnswer}
-                onChange={handleAnswerSelection}
+                onChange={onAnswerSelect}
               >
-                {questions[currentQuestion].answers.map((answer) => (
+                {questions[currentQuestionIndex].answers.map((answer) => (
                   <FormControlLabel
                     key={answer}
                     value={answer}
@@ -80,21 +74,23 @@ const Quiz = ({ handleQuizFinish, questions }) => {
         <CardActions>
           <Grid container spacing={2}>
             <Grid item>
-              {currentQuestion > 0 && (
+              {currentQuestionIndex > 0 && (
                 <Button
                   variant='contained'
-                  onClick={() => setCurrentQuestion(currentQuestion - 1)}
+                  onClick={() =>
+                    setCurrentQuestionIndex(currentQuestionIndex - 1)
+                  }
                 >
                   Previous
                 </Button>
               )}
             </Grid>
             <Grid item>
-              {currentQuestion < questions.length - 1 ? (
+              {currentQuestionIndex < questions.length - 1 ? (
                 <Button
                   variant='contained'
                   color='primary'
-                  onClick={handleNextQuestion}
+                  onClick={handleClickNextQuestion}
                 >
                   Next
                 </Button>
@@ -102,7 +98,7 @@ const Quiz = ({ handleQuizFinish, questions }) => {
                 <Button
                   variant='contained'
                   style={{ backgroundColor: 'green', color: 'white' }}
-                  onClick={handleFinishQuiz}
+                  onClick={handleClickFinish}
                 >
                   Finish
                 </Button>
@@ -111,11 +107,6 @@ const Quiz = ({ handleQuizFinish, questions }) => {
           </Grid>
         </CardActions>
       </Card>
-      {loading && (
-        <Box mt={2} display='flex' justifyContent='center'>
-          <CircularProgress />
-        </Box>
-      )}
     </Box>
   );
 };
