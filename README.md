@@ -29,5 +29,5 @@ This application has a feature to list down all the available courses and relati
 
 In the project directory,
 
-1. Run `npm install` script.
+1. Run `npm install --legacy-peer-deps` script.
 2. Run `npm run dev` script. It runs the app in development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
