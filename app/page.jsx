@@ -1,5 +1,6 @@
-import { Typography } from '../components/Mui/material';
+'use client';
+import React from 'react';
 
 export default function RootPage() {
-  return <Typography variant='h1'>Page</Typography>;
+  return <></>;
 }
