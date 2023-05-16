@@ -1,6 +1,6 @@
 # Q-Rate Learning Web
 
-This application features a course catalog with a list of available courses and their respective lessons. You can check out a live demo [here](https://main--dynamic-duckanoo-a032c8.netlify.app/).
+This application features a course catalog with a list of available courses and their respective lessons. You can check out a live demo [here](https://q-rate-task.vercel.app/).
 
 ## Features
 
