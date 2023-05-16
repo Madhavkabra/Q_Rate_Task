@@ -4,10 +4,10 @@ import { useParams } from 'next/navigation';
 import PropTypes from 'prop-types';
 import '@/styles/globals.css';
 import {
-  Container,
   Typography,
   Breadcrumbs,
   Link,
+  Box,
 } from '../../components/Mui/material';
 import data from '../../public/course.json';
 
@@ -27,7 +27,7 @@ export default function CourseLayout({ children }) {
   }, [params]);
 
   return (
-    <Container maxWidth='xl'>
+    <Box ml='250px'>
       <Typography variant='h1'>Course</Typography>
       <Breadcrumbs aria-label='breadcrumb'>
         <Link underline='hover' color='inherit'>
@@ -36,7 +36,7 @@ export default function CourseLayout({ children }) {
         <Typography color='text.primary'>{lessonName}</Typography>
       </Breadcrumbs>
       {children}
-    </Container>
+    </Box>
   );
 }
 

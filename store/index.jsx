@@ -1,9 +1,10 @@
+'use client';
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 
 // project imports
-import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
-import { persistReducer } from 'redux-persist';
+import { persistReducer, persistStore } from 'redux-persist';
 import progressReducer from './progress';
+import storage from './storage';
 
 const combinedReducers = combineReducers({
   progress: progressReducer,
@@ -23,5 +24,7 @@ const store = configureStore({
       serializableCheck: false,
     }),
 });
+
+export const persistor = persistStore(store);
 
 export default store;

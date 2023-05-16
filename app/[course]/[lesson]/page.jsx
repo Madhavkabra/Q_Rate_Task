@@ -1,7 +1,7 @@
 'use client';
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import ReactPlayer from 'react-player/youtube';
+import dynamic from 'next/dynamic';
 import { useDispatch, useSelector } from 'react-redux';
 import Quiz from '@/components/Quiz';
 import {
@@ -12,6 +12,10 @@ import {
 import LessonCompleted from '@/components/LessonCompleted';
 import courseData from '../../../public/course.json';
 import { Box } from '../../../components/Mui/material';
+
+const ReactPlayer = dynamic(() => import('react-player/youtube'), {
+  ssr: false,
+});
 
 export default function RootPage({ params }) {
   const router = useRouter();
@@ -26,7 +30,6 @@ export default function RootPage({ params }) {
   const [lessonsData, setLessonsData] = React.useState();
   const currentCourse = courses.find((f) => f.course_id === params.course);
   const totalCourseLessons = currentCourse?.lessons.length;
-  const videoRef = useRef();
   const time = useSelector((state) => state.progress.videoTime);
   let played = 0;
   let seek = Math.floor(time[params.lesson] || 0);
@@ -48,22 +51,7 @@ export default function RootPage({ params }) {
 
   useEffect(() => {
     fetchCourses();
-
-    return () => {
-      clearInterval(playInterval);
-
-      if (!isLessonCompleted) {
-        dispatch(setVideoTime([params.lesson, played]));
-      }
-    };
   }, []);
-
-  // Storing video progress in a interval.
-  const playInterval = setInterval(() => {
-    if (videoRef.current !== null) {
-      played = videoRef?.current?.getCurrentTime();
-    }
-  }, 1000);
 
   // Callback on video end.
   const handleVideoEnd = () => {
@@ -108,6 +96,11 @@ export default function RootPage({ params }) {
     else alert('You Have Completed The Learning');
   };
 
+  // Storing video progress in a interval.
+  const handleVideo = ({ playedSeconds }) => {
+    dispatch(setVideoTime([params.lesson, playedSeconds]));
+  };
+
   return (
     <>
       {!isVideoCompleted && (
@@ -119,7 +112,7 @@ export default function RootPage({ params }) {
           mt='50px'
         >
           <ReactPlayer
-            ref={videoRef}
+            onProgress={handleVideo}
             config={{
               youtube: {
                 playerVars: {
