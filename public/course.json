@@ -1,53 +1,114 @@
 [
   {
+    "course_id": "645f750cd39941a9ad381b34223",
+    "course_name": "Javascript ES6",
+    "lessons": [
+      {
+        "lesson_id": "645f75b7ac21ec8862b96esd",
+        "lesson_name": "Destructuring",
+        "video_url": "https://youtu.be/giNjEgYTd9E",
+        "questions": [
+          {
+            "id": 1,
+            "question": "What is destructuring in JavaScript?",
+            "answers": [
+              "Through destructuring, we can unpack values from arrays or object properties into separate variables.",
+              "Destructuring allows us to restructure object properties",
+              "Destructuring allows us to restructure array elements.",
+              "All of these."
+            ],
+            "correctAnswer": "Through destructuring, we can unpack values from arrays or object properties into separate variables."
+          },
+          {
+            "id": 2,
+            "question": "Should we use destructuring?",
+            "answers": [
+              "Yes",
+              "No",
+              "Not Sure"
+            ],
+            "correctAnswer": "Yes"
+          }
+        ]
+      },
+      {
+        "lesson_id": "645f75bd61eec9983689dssaf",
+        "lesson_name": "Map Filter Reduce",
+        "video_url": "https://youtu.be/oQ7Le6SuLNA",
+        "questions": [
+          {
+            "id": 1,
+            "question": "Which of the following is an array method?",
+            "answers": [
+              "Map",
+              "Filter",
+              "Reduce",
+              "All of these"
+            ],
+            "correctAnswer": "All of these"
+          },
+          {
+            "id": 2,
+            "question": "Which array method is used to iterate on all the array elements and perform some task/transformation on them and return single value?",
+            "answers": [
+              "Map",
+              "Reduce",
+              "Filter",
+              "ForEach"
+            ],
+            "correctAnswer": "Reduce"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "course_id": "645f750cd39941a9ad381b80",
     "course_name": "Javascript",
     "lessons": [
       {
         "lesson_id": "645f75b7ac21ec8862b96e89",
-        "lesson_name": "Javascript Lesson 1",
-        "video_url": "https://www.youtube.com/embed/MvsAesQ-4zA",
+        "lesson_name": "Variables",
+        "video_url": "https://youtu.be/TOkU5HxES1o",
         "questions": [
           {
             "id": 1,
-            "question": "Why is typescript inferior to javascript?",
+            "question": "Which statement cannot be used to declare a variable in JavaScript?",
             "answers": [
-              "Because it is new, and new things are dumb",
-              "It is not",
-              "Because JavaScript rocks TypeScipt shocks",
-              "Because I don not like it"
+              "let",
+              "var",
+              "int",
+              "const"
             ],
             "correctAnswer": "It is not"
-          },
-          {
-            "id": 2,
-            "question": "What is the largest continent in the world? lesson 1",
-            "answers": ["North America", "South America", "Europe", "Asia"],
-            "correctAnswer": "Asia"
           }
         ]
       },
       {
         "lesson_id": "645f75bd61eec9983689dced",
-        "lesson_name": "Javascript Lesson 2",
-        "video_url": "https://www.youtube.com/watch?v=FAyKDaXEAgc",
+        "lesson_name": "Constant",
+        "video_url": "https://youtu.be/Wsy7nhFnfbM",
         "questions": [
           {
             "id": 1,
-            "question": "What is javascript?",
+            "question": "Can we change the value of const variable?",
             "answers": [
-              "A programming language",
-              "A fruit",
-              "A famous person",
-              "Your neighbour"
+              "Yes",
+              "No",
+              "Not Sure"
             ],
-            "correctAnswer": "A programming language"
+            "correctAnswer": "No"
           },
           {
             "id": 2,
-            "question": "What is the largest continent in the world?",
-            "answers": ["North America", "South America", "Europe", "Asia"],
-            "correctAnswer": "Asia"
+            "question": "What is the scope of const variable?",
+            "answers": [
+              "Global",
+              "Function",
+              "Block",
+              "Not Sure"
+            ],
+            "correctAnswer": "Block"
           }
         ]
       }
@@ -59,39 +120,30 @@
     "lessons": [
       {
         "lesson_id": "645f75c9caa0ac7db1d33233",
-        "lesson_name": "Node Lesson 1",
-        "video_url": "https://www.youtube.com/watch?v=snYu2JUqSWs",
+        "lesson_name": "Introduction",
+        "video_url": "https://youtu.be/_sPLVYXfyDE",
         "questions": [
           {
             "id": 1,
-            "question": "What is the capital of France?lesson 1 course 2",
-            "answers": ["London", "Paris", "New York", "Madrid"],
-            "correctAnswer": "Paris"
+            "question": "Which of the following statements are true?",
+            "answers": [
+              "Node js is server side language",
+              "Node js is client side language",
+              "Node js is both server and client side language",
+              "Not Sure"
+            ],
+            "correctAnswer": "Node js is server side language"
           },
           {
             "id": 2,
-            "question": "What is the largest continent in the world?  lesson 1 course 2",
-            "answers": ["North America", "South America", "Europe", "Asia"],
-            "correctAnswer": "Asia"
-          }
-        ]
-      },
-      {
-        "lesson_id": "645f75d4a68f1a772314680e",
-        "lesson_name": "Node Lesson 2",
-        "video_url": "https://www.youtube.com/watch?v=lTTajzrSkCw",
-        "questions": [
-          {
-            "id": 1,
-            "question": "What is the capital of France?  lesson 2 course 2",
-            "answers": ["London", "Paris", "New York", "Madrid"],
-            "correctAnswer": "Paris"
-          },
-          {
-            "id": 2,
-            "question": "What is the largest continent in the world? lesson 2 course 2",
-            "answers": ["North America", "South America", "Europe", "Asia"],
-            "correctAnswer": "Asia"
+            "question": "Node.js is written in which language?",
+            "answers": [
+              "Javascript",
+              "Java",
+              "C",
+              "C++"
+            ],
+            "correctAnswer": "Javascript"
           }
         ]
       }
