@@ -31,7 +31,6 @@ export default function RootPage({ params }) {
   const currentCourse = courses.find((f) => f.course_id === params.course);
   const totalCourseLessons = currentCourse?.lessons.length;
   const time = useSelector((state) => state.progress.videoTime);
-  let played = 0;
   let seek = Math.floor(time[params.lesson] || 0);
 
   // fetching course data.
@@ -59,21 +58,18 @@ export default function RootPage({ params }) {
   };
 
   // Handling result after completing quiz.
-  const handleQuizFinish = (marks) => {
-    const result = marks === currentLesson?.questions.length;
-    if (result) {
-      dispatch(
-        setLessonsCompleted([
-          params.course,
-          params.lesson,
-          completedLessons[params.course]
-            ? completedLessons[params.course][0] + 1
-            : 1,
-          totalCourseLessons,
-        ])
-      );
-    }
-    setIsLessonCompleted(result);
+  const handleQuizFinish = () => {
+    dispatch(
+      setLessonsCompleted([
+        params.course,
+        params.lesson,
+        completedLessons[params.course]
+          ? completedLessons[params.course][0] + 1
+          : 1,
+        totalCourseLessons,
+      ])
+    );
+    setIsLessonCompleted(true);
   };
 
   // Next lesson button click.

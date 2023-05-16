@@ -5,9 +5,9 @@ import {
   Card,
   CardActions,
   CardContent,
-  CircularProgress,
   FormControl,
   FormControlLabel,
+  FormHelperText,
   Grid,
   Radio,
   RadioGroup,
@@ -17,26 +17,30 @@ import {
 const Quiz = ({ handleQuizFinish, questions }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState('');
-  const [score, setScore] = useState(0);
+  const [wrongAnswer, setWrongAnswer] = useState(false);
 
   const onAnswerSelect = (e) => {
+    setWrongAnswer(false);
     setSelectedAnswer(e.target.value);
   };
 
   const handleClickNextQuestion = () => {
     if (selectedAnswer === questions[currentQuestionIndex].correctAnswer) {
-      setScore(score + 1);
+      setWrongAnswer(false);
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+      return;
     }
+    setWrongAnswer(true);
     setSelectedAnswer('');
-    setCurrentQuestionIndex(currentQuestionIndex + 1);
   };
 
   const handleClickFinish = () => {
     if (selectedAnswer === questions[currentQuestionIndex].correctAnswer) {
-      handleQuizFinish(score + 1);
-
-      setScore(score + 1);
+      setWrongAnswer(false);
+      handleQuizFinish();
+      return;
     }
+    setWrongAnswer(true);
   };
 
   return (
@@ -68,6 +72,11 @@ const Quiz = ({ handleQuizFinish, questions }) => {
                   />
                 ))}
               </RadioGroup>
+              {wrongAnswer && (
+                <FormHelperText error={wrongAnswer}>
+                  You have selected the wrong answer.
+                </FormHelperText>
+              )}
             </FormControl>
           </Box>
         </CardContent>
