@@ -1,7 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
+'use client';
+import { createSlice } from '@reduxjs/toolkit';
 
 export const progressSlice = createSlice({
-  name: "progress",
+  name: 'progress',
   initialState: {
     lessonsCompleted: {},
     completedLessons: [],
@@ -15,15 +16,20 @@ export const progressSlice = createSlice({
       state.completedLessons.push(lessonId);
     },
     setActiveCourse: (state, action) => {
-        state.activeCourse = action.payload;
+      state.activeCourse = action.payload;
     },
     setVideoTime: (state, action) => {
       const [lessonId, time] = action.payload;
       state.videoTime[lessonId] = time;
-    }
+    },
   },
 });
 
-export const { setLessonsCompleted, setActiveCourse, setVideoTime, setActiveLessonIndex } = progressSlice.actions;
+export const {
+  setLessonsCompleted,
+  setActiveCourse,
+  setVideoTime,
+  setActiveLessonIndex,
+} = progressSlice.actions;
 
 export default progressSlice.reducer;
