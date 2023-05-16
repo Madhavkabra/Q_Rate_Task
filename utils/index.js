@@ -1,4 +1,4 @@
-import data from '../public/data.json';
+import data from '../public/course.json';
 import SchoolIcon from '@mui/icons-material/School';
 
 export const mapCourse = () => {

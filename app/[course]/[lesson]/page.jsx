@@ -9,8 +9,9 @@ import {
   setActiveCourse,
   setVideoTime,
 } from '@/store/progress';
-import data from '../../../public/data.json';
-import { Box, Button, Typography } from '../../../components/Mui/material';
+import LessonCompleted from '@/components/LessonCompleted';
+import courseData from '../../../public/course.json';
+import { Box } from '../../../components/Mui/material';
 
 export default function RootPage({ params }) {
   const router = useRouter();
@@ -30,42 +31,46 @@ export default function RootPage({ params }) {
   let played = 0;
   let seek = Math.floor(time[params.lesson] || 0);
 
-  const fetchJson = useCallback(() => {
-    const { course, lesson } = params;
-    dispatch(setActiveCourse(course));
+  // fetching course data.
+  const fetchCourses = useCallback(() => {
+    const { course: courseId, lesson: lessonId } = params;
+    dispatch(setActiveCourse(courseId));
 
-    const courseData = data.find((user) => user.course_id === course)?.lessons;
-    const lessonData = courseData?.find((les) => lesson === les.lesson_id);
+    const lessons = courseData.find(
+      (user) => user.course_id === courseId
+    )?.lessons;
+    const lesson = lessons?.find((les) => lessonId === les.lesson_id);
 
-    setLessonsData(courseData);
-    setCurrentLesson(lessonData);
-    setCourses(data);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setLessonsData(lessons);
+    setCurrentLesson(lesson);
+    setCourses(courseData);
   }, [params]);
 
   useEffect(() => {
-    fetchJson();
-    videoRef.current.seekTo(0.5)
+    fetchCourses();
+
     return () => {
       clearInterval(playInterval);
+
       if (!isLessonCompleted) {
         dispatch(setVideoTime([params.lesson, played]));
       }
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Storing video progress in a interval.
   const playInterval = setInterval(() => {
     if (videoRef.current !== null) {
       played = videoRef?.current?.getCurrentTime();
     }
   }, 1000);
 
+  // Callback on video end.
   const handleVideoEnd = () => {
     setIsVideoCompleted(true);
   };
 
+  // Handling result after completing quiz.
   const handleQuizFinish = (marks) => {
     const result = marks === currentLesson?.questions.length;
     if (result) {
@@ -83,12 +88,14 @@ export default function RootPage({ params }) {
     setIsLessonCompleted(result);
   };
 
+  // Next lesson button click.
   const handleNextLesson = () => {
     const index = lessonsData.indexOf(currentLesson);
     const nextLesson = lessonsData[index + 1];
     router.push(`/${params.course}/${nextLesson.lesson_id}`);
   };
 
+  // Next course button click.
   const handleNextCourse = () => {
     const currentCourse = courses.find(
       (user) => user.course_id === params.course
@@ -103,11 +110,7 @@ export default function RootPage({ params }) {
 
   return (
     <>
-      <Typography mb='25px' variant='h3' textAlign='center'>
-        {courses.find((user) => user.course_id === params.course)?.course_name}{' '}
-        Course
-      </Typography>
-      {!isVideoCompleted ? (
+      {!isVideoCompleted && (
         <Box
           width='100%'
           display='flex'
@@ -117,12 +120,12 @@ export default function RootPage({ params }) {
         >
           <ReactPlayer
             ref={videoRef}
-            config={{ 
+            config={{
               youtube: {
                 playerVars: {
-                  start: seek
-                }
-              }
+                  start: seek,
+                },
+              },
             }}
             controls={true}
             playing={true}
@@ -131,34 +134,18 @@ export default function RootPage({ params }) {
             style={{ width: '80%', height: '50vh' }}
           />
         </Box>
-      ) : isLessonCompleted ? (
-        <Box
-          height='50%'
-          display='flex'
-          flexDirection='column'
-          justifyContent='center'
-          alignItems='center'
-          gap='25px'
-        >
-          <Box
-            mt='20rem'
-            width='20rem'
-            component='img'
-            src='/congrats.png'
-          ></Box>
-          <Typography variant='h3'>Congratulations !!!</Typography>
-          <Typography variant='h3'>You Have Completed The Lesson</Typography>
-          {lessonsData?.indexOf(currentLesson) !== lessonsData?.length - 1 ? (
-            <Button variant='contained' onClick={handleNextLesson}>
-              Next Lesson
-            </Button>
-          ) : (
-            <Button variant='contained' onClick={handleNextCourse}>
-              Next Course
-            </Button>
-          )}
-        </Box>
-      ) : (
+      )}
+
+      {isVideoCompleted && isLessonCompleted && (
+        <LessonCompleted
+          currentLesson={currentLesson}
+          lessonsData={lessonsData}
+          handleNextLesson={handleNextLesson}
+          handleNextCourse={handleNextCourse}
+        />
+      )}
+
+      {isVideoCompleted && !isLessonCompleted && (
         <Box mt='50px'>
           {currentLesson && (
             <Quiz
