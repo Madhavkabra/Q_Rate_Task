@@ -64,7 +64,9 @@ export default function RootPage({ params }) {
         params.course,
         params.lesson,
         completedLessons[params.course]
-          ? completedLessons[params.course][0] + 1
+          ? completedLessons?.[params.course]?.[0] < totalCourseLessons
+            ? completedLessons[params.course][0] + 1
+            : completedLessons[params.course][0]
           : 1,
         totalCourseLessons,
       ])

@@ -14,9 +14,16 @@ const AppMenu = () => {
   }, []);
 
   return (
-    <List component='nav' className={classes.appMenu} disablePadding>
+    <List
+      component='nav'
+      className={classes.appMenu}
+      disablePadding
+    >
       {appMenuItems.map((item, index) => (
-        <AppMenuItem {...item} key={index} />
+        <AppMenuItem
+          {...item}
+          key={index}
+        />
       ))}
     </List>
   );

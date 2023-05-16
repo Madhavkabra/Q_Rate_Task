@@ -6,15 +6,21 @@ import { Box, Checkbox, Typography, ListItem } from '@mui/material';
 import { useParams } from 'next/navigation';
 
 const AppMenuItemComponent = (props) => {
-  const param = useParams();
-  const { className, onClick, link, children, name, id } = props;
+  const { lesson: lessonId } = useParams();
+  const { className, onClick, link, children, name, id, disabled } = props;
 
-  const completed = useSelector((state) => state.progress.completedLessons);
+  const { completedLessons: completed } = useSelector(
+    (state) => state.progress
+  );
   const isComplete = completed.join(',').includes(id);
 
   if (!link || typeof link !== 'string') {
     return (
-      <ListItem button className={className} onClick={onClick}>
+      <ListItem
+        button
+        className={className}
+        onClick={onClick}
+      >
         {children}
       </ListItem>
     );
@@ -22,14 +28,26 @@ const AppMenuItemComponent = (props) => {
 
   return (
     <ListItem
-      selected={param.lesson === id}
+      selected={lessonId === id}
       button
       className={className}
+      disabled={disabled && !isComplete}
       // eslint-disable-next-line react/display-name
       component={forwardRef((props, ref) => (
-        <Link href={link} {...props} innerref={ref}>
-          <Box display='flex' gap='2rem'>
-            <Checkbox disabled size='small' checked={isComplete} />
+        <Link
+          href={link}
+          {...props}
+          innerref={ref}
+        >
+          <Box
+            display='flex'
+            gap='2rem'
+          >
+            <Checkbox
+              disabled
+              size='small'
+              checked={isComplete}
+            />
             <Typography variant='body2'>{name}</Typography>
           </Box>
         </Link>

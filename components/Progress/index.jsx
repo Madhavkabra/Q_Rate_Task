@@ -8,11 +8,11 @@ const Progress = () => {
   const drawerWidth = 220;
   const [lessonProgress, setLessonProgress] = useState(0);
   const [courseProgress, setCourseProgress] = useState(0);
-  const activeCourse = useSelector((state) => state.progress.activeCourse);
-  const lessonsCompleted = useSelector(
-    (state) => state.progress.lessonsCompleted
+  const { lessonsCompleted, totalLessons, activeCourse } = useSelector(
+    (state) => state.progress
   );
-  const inTotalLessons = 4;
+
+  const inTotalLessons = totalLessons;
 
   useEffect(() => {
     const [lessonCount, totalLessons] = lessonsCompleted[activeCourse] || [
@@ -40,11 +40,19 @@ const Progress = () => {
       }}
     >
       <Toolbar sx={{ justifyContent: 'end', gap: '4rem' }}>
-        <Box display='flex' gap='2rem' alignItems='center'>
+        <Box
+          display='flex'
+          gap='2rem'
+          alignItems='center'
+        >
           <Typography fontWeight='600'>Current Course Progress:</Typography>
           <LinearProgressWithLabel value={lessonProgress} />
         </Box>
-        <Box display='flex' gap='2rem' alignItems='center'>
+        <Box
+          display='flex'
+          gap='2rem'
+          alignItems='center'
+        >
           <Typography fontWeight='600'>Learning Progress:</Typography>
           <LinearProgressWithLabel value={courseProgress} />
         </Box>

@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import PropTypes from 'prop-types';
 import '@/styles/globals.css';
+import { useDispatch } from 'react-redux';
+import { setTotalLessons } from '@/store/progress';
 import {
   Typography,
   Breadcrumbs,
@@ -15,6 +17,7 @@ export default function CourseLayout({ children }) {
   const params = useParams();
   const [courseName, setCourseName] = useState('');
   const [lessonName, setLessonName] = useState('');
+  const dispatch = useDispatch();
 
   // Getting the course name and lesson name for breadcrumbs.
   useEffect(() => {
@@ -24,13 +27,24 @@ export default function CourseLayout({ children }) {
     )?.lesson_name;
     setCourseName(course?.course_name);
     setLessonName(lesson);
+
+    const totalLessons = data.reduce((prev, curr) => {
+      const length = curr.lessons.length;
+
+      return prev + length;
+    }, 0);
+
+    dispatch(setTotalLessons(totalLessons));
   }, [params]);
 
   return (
     <Box ml='250px'>
       <Typography variant='h1'>Course</Typography>
       <Breadcrumbs aria-label='breadcrumb'>
-        <Link underline='hover' color='inherit'>
+        <Link
+          underline='hover'
+          color='inherit'
+        >
           {courseName}
         </Link>
         <Typography color='text.primary'>{lessonName}</Typography>

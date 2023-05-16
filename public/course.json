@@ -80,7 +80,7 @@
               "int",
               "const"
             ],
-            "correctAnswer": "It is not"
+            "correctAnswer": "int"
           }
         ]
       },

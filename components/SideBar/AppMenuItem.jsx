@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
+import { useParams } from 'next/navigation';
 import { makeStyles, createStyles } from '@mui/styles';
 import List from '@mui/material/List';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -16,10 +18,32 @@ export const AppMenuItemPropTypes = {
 };
 
 const AppMenuItem = (props) => {
-  const { name, link, Icon, id, items = [] } = props;
+  const { name, link, Icon, id, disabledItem, items = [] } = props;
   const classes = useStyles();
   const isExpandable = items && items.length > 0;
   const [open, setOpen] = React.useState(false);
+
+  const { course: courseId } = useParams();
+  const { activeLessons } = useSelector((state) => state.progress);
+
+  const findActiveLessonIndex = () => {
+    const itemIndex = items.findIndex(
+      (item) =>
+        item.id === activeLessons[courseId][activeLessons[courseId].length - 1]
+    );
+
+    if (itemIndex === -1) {
+      return 0;
+    }
+
+    return itemIndex + 1;
+  };
+
+  const activeLessonIndex = items.length
+    ? activeLessons?.[courseId]
+      ? findActiveLessonIndex()
+      : 0
+    : 0;
 
   function handleClick() {
     setOpen(!open);
@@ -32,21 +56,36 @@ const AppMenuItem = (props) => {
       id={id}
       link={link}
       onClick={handleClick}
+      disabled={disabledItem}
     >
       {!!Icon && (
         <ListItemIcon>
           <Icon />
         </ListItemIcon>
       )}
-      <ListItemText primary={name} inset={!Icon} />
+      <ListItemText
+        primary={name}
+        inset={!Icon}
+      />
     </AppMenuItemComponent>
   );
 
   const MenuItemChildren = isExpandable ? (
-    <Collapse in={open} timeout='auto' unmountOnExit>
-      <List component='div' sx={{ paddingX: 2 }}>
+    <Collapse
+      in={open}
+      timeout='auto'
+      unmountOnExit
+    >
+      <List
+        component='div'
+        sx={{ paddingX: 2 }}
+      >
         {items.map((item, index) => (
-          <AppMenuItem {...item} key={index} />
+          <AppMenuItem
+            {...item}
+            key={index}
+            disabledItem={index > activeLessonIndex}
+          />
         ))}
       </List>
       <Divider />
